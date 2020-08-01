@@ -1,0 +1,61 @@
+{% extends "mail/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <div class="page-heading">
+        <h1> CS50 Email Application </h1>
+    </div>
+    <h2>{{ request.user.email }}</h2>
+
+    <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
+    <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
+    <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
+    <button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>
+    <a class="btn btn-sm btn-outline-primary" href="{% url 'logout' %}">Log Out</a>
+    <hr>
+
+    <div id="status" class="response-status">
+    </div>
+    <div id="messages" class="messages-count">
+    </div>
+    <div id="emails-view">
+    </div>
+    <div id="email-details">
+      <div id="archive-div">
+          <form>
+          <input type="submit" class="btn btn-sm btn-warning" id="archive-btn" value="Archive Mail">
+          </form>
+      </div>
+          <div id="email-head" class="em-head">
+          </div>
+          <div id="email-body" class="em-body">
+          </div>
+      <div id="reply-div">
+          <input class="btn btn-sm btn-primary" id="reply-btn" value="Reply"></input>
+      </div>
+    </div>
+    <div id="compose-view">
+        <h3 id="form-email-heading">New Email</h3>
+        <form id="compose-form">
+            <div class="form-group">
+                From: <input disabled class="form-control" value="{{ request.user.email }}" id="email-from">
+            </div>
+            <div class="form-group">
+                To: <input id="compose-recipients" class="form-control">
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="compose-subject" placeholder="Subject">
+            </div>
+            <textarea class="form-control" id="compose-body" placeholder="Body"></textarea><br>
+            <input type="submit" class="btn btn-primary"/>
+        </form>
+    </div>
+    <div class="page-footer">
+      <br><span class="text-muted">CS50’s Web Programming with Python and JavaScript - July 2020 (Project 3 - Mail)<br>
+      by: Jasmin Tumulak Estudillo | jasminetumulak@gmail.com<span>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'mail/inbox.js' %}"></script>
+{% endblock %}
